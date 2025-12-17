@@ -1,13 +1,22 @@
 import jwt, { SignOptions } from "jsonwebtoken";
 
+const JWT_SECRET = process.env.JWT_SECRET as string;
+
+// Ensure expiresIn always matches JWT expected type
+const expiresIn: SignOptions["expiresIn"] =
+  (process.env.JWT_EXPIRES_IN as SignOptions["expiresIn"]) || "7d";
+
 export const generateToken = (userId: string) => {
-  const secret = process.env.JWT_SECRET as string;
-  const options: SignOptions = {
-    expiresIn: (process.env.JWT_EXPIRES_IN || "7d") as string | number,
-  };
-  return jwt.sign({ id: userId }, secret, options);
+  const options: SignOptions = { expiresIn };
+
+  return jwt.sign(
+    { id: userId },
+    JWT_SECRET,
+    options
+  );
 };
 
 export const verifyToken = (token: string) => {
-  return jwt.verify(token, process.env.JWT_SECRET!);
+  return jwt.verify(token, JWT_SECRET);
 };
+;
