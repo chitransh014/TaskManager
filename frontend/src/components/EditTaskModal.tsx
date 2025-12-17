@@ -13,7 +13,14 @@ interface EditTaskModalProps {
 export default function EditTaskModal({ open, onClose, task }: EditTaskModalProps) {
   const queryClient = useQueryClient();
 
-  const [form, setForm] = useState({
+  const [form, setForm] = useState<{
+    title: string;
+    description: string;
+    dueDate: string;
+    priority: "LOW" | "MEDIUM" | "HIGH" | "URGENT";
+    status: "TODO" | "IN_PROGRESS" | "REVIEW" | "COMPLETED";
+    assignedToId: string;
+  }>({
     title: "",
     description: "",
     dueDate: "",
@@ -50,7 +57,7 @@ export default function EditTaskModal({ open, onClose, task }: EditTaskModalProp
     mutationFn: () => updateTaskApi(task.id, form),
     onSuccess: () => {
       socket.emit("task:updated");
-      queryClient.invalidateQueries(["dashboard"]);
+      queryClient.invalidateQueries({ queryKey: ["dashboard"] });
       onClose();
     },
   });
@@ -117,7 +124,7 @@ export default function EditTaskModal({ open, onClose, task }: EditTaskModalProp
               <select
                 className="w-full p-2.5 rounded-lg bg-gray-100 outline-none focus:ring-2 focus:ring-purple-500"
                 value={form.priority}
-                onChange={(e) => setForm({ ...form, priority: e.target.value })}
+                onChange={(e) => setForm({ ...form, priority: e.target.value as "LOW" | "MEDIUM" | "HIGH" | "URGENT" })}
               >
                 <option value="LOW">Low</option>
                 <option value="MEDIUM">Medium</option>
@@ -134,7 +141,7 @@ export default function EditTaskModal({ open, onClose, task }: EditTaskModalProp
               <select
                 className="w-full p-2.5 rounded-lg bg-gray-100 outline-none focus:ring-2 focus:ring-purple-500"
                 value={form.status}
-                onChange={(e) => setForm({ ...form, status: e.target.value })}
+                onChange={(e) => setForm({ ...form, status: e.target.value as "TODO" | "IN_PROGRESS" | "REVIEW" | "COMPLETED" })}
               >
                 <option value="TODO">To Do</option>
                 <option value="IN_PROGRESS">In Progress</option>

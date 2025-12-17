@@ -36,8 +36,8 @@ export default function TaskDetails() {
     mutationFn: (status: any) => updateTaskApi(id!, { status }),
     onSuccess: () => {
       socket.emit("task:updated");
-      queryClient.invalidateQueries(["task", id]);
-      queryClient.invalidateQueries(["dashboard"]);
+      queryClient.invalidateQueries({ queryKey: ["task", id] });
+      queryClient.invalidateQueries({ queryKey: ["dashboard"] });
     },
   });
 

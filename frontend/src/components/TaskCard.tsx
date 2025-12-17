@@ -24,7 +24,7 @@ export default function TaskCard({ task, onEdit }: TaskCardProps) {
       updateTaskApi(task.id, { status }),
     onSuccess: () => {
       socket.emit("task:updated");
-      queryClient.invalidateQueries(["dashboard"]);
+      queryClient.invalidateQueries({ queryKey: ["dashboard"] });
     },
   });
 
@@ -35,7 +35,7 @@ export default function TaskCard({ task, onEdit }: TaskCardProps) {
     mutationFn: () => deleteTaskApi(task.id),
     onSuccess: () => {
       socket.emit("task:deleted");
-      queryClient.invalidateQueries(["dashboard"]);
+      queryClient.invalidateQueries({ queryKey: ["dashboard"] });
     },
   });
 

@@ -11,7 +11,7 @@ const createTaskSchema = z.object({
   description: z.string().min(1, "Description is required"),
   dueDate: z.string().min(1, "Due date is required"),
   priority: z.enum(["LOW", "MEDIUM", "HIGH", "URGENT"]),
-  status: z.enum(["TODO", "IN_PROGRESS", "REVIEW", "COMPLETED"]).default("TODO"),
+  status: z.enum(["TODO", "IN_PROGRESS", "REVIEW", "COMPLETED"]).optional(),
   assignedToId: z.string().optional(),
 });
 
@@ -49,7 +49,7 @@ export default function CreateTaskModal({ open, onClose, users = [] }: Props) {
   });
 
   const onSubmit = (data: CreateTaskForm) => {
-    mutation.mutate(data);
+    mutation.mutate({ ...data, status: data.status || "TODO" } as any);
   };
 
   if (!open) return null;
