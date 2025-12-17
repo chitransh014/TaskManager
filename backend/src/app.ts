@@ -9,6 +9,7 @@ import { errorHandler } from "./middleware/error.middleware";
 
 const app = express();
 
+app.set("trust proxy", 1);
 app.use(helmet());
 app.use(express.json());
 app.use(cookieParser());
