@@ -9,17 +9,19 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 
   const fetchProfile = async () => {
     try {
-      const user = await getProfileApi();
-      setUser(user);
-    } catch {
+      const u = await getProfileApi();
+      setUser(u);
+    } catch (err) {
       setUser(null);
+      localStorage.removeItem("token");
+    } finally {
+      setLoading(false);
     }
   };
 
   useEffect(() => {
     const checkAuth = async () => {
       await fetchProfile();
-      setLoading(false);
     };
 
     checkAuth();

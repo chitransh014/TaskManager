@@ -11,7 +11,7 @@ export default class AuthController {
 
       res.cookie("token", token, cookieOptions);
 
-      return res.json({ user });
+      return res.json({ user, token });
     } catch (err: any) {
       return res.status(400).json({ message: err.message });
     }
@@ -24,7 +24,7 @@ export default class AuthController {
 
       res.cookie("token", token, cookieOptions);
 
-      return res.json({ user });
+      return res.json({ user, token });
     } catch (err: any) {
       return res.status(400).json({ message: err.message });
     }

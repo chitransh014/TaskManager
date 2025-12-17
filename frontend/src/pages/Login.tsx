@@ -15,6 +15,7 @@ export default function Login() {
   const loginMutation = useMutation({
     mutationFn: loginApi,
     onSuccess: (data) => {
+      localStorage.setItem("token", data.token);
       setUser(data.user);
       navigate("/");
     },

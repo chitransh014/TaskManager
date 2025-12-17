@@ -12,7 +12,8 @@ export default function Register() {
 
   const mutation = useMutation({
     mutationFn: registerApi,
-    onSuccess: async () => {
+    onSuccess: async (data) => {
+      localStorage.setItem("token", data.token);
       show("Account created successfully");
       navigate("/login");
     },
