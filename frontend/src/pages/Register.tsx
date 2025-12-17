@@ -16,6 +16,9 @@ export default function Register() {
       show("Account created successfully");
       navigate("/login");
     },
+    onError: (error: any) => {
+      show(error.message || "Registration failed");
+    },
   });
 
   const submit = (e: React.FormEvent) => {

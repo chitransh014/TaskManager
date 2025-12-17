@@ -3,10 +3,12 @@ import { useMutation } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
 import { loginApi } from "../api/auth.api";
 import { useAuth } from "../hooks/useAuth";
+import { useNotification } from "../context/NotificationContext";
 import GradientBackground from "../components/GradientBackground";
 
 export default function Login() {
   const { setUser, fetchProfile } = useAuth();
+  const { show } = useNotification();
   const navigate = useNavigate();
   const [form, setForm] = useState({ email: "", password: "" });
 
@@ -15,6 +17,9 @@ export default function Login() {
     onSuccess: (data) => {
       setUser(data.user);
       navigate("/");
+    },
+    onError: (error: any) => {
+      show(error.message || "Login failed");
     },
   });
 
