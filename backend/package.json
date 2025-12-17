@@ -3,15 +3,12 @@
   "version": "1.0.0",
   "main": "dist/server.js",
   "scripts": {
-  "postinstall": "chmod +x node_modules/.bin/prisma && npx prisma generate",
-  "dev": "ts-node-dev --respawn --transpile-only src/server.ts",
-  "build": "tsc",
-  "start": "node dist/server.js",
-  "test": "jest"
-},
-
-    
-  
+    "postinstall": "chmod +x node_modules/.bin/prisma && npx prisma generate",
+    "dev": "ts-node-dev --respawn --transpile-only src/server.ts",
+    "build": "tsc",
+    "start": "npx prisma migrate deploy && node dist/server.js",
+    "test": "jest"
+  },
   "dependencies": {
     "@prisma/client": "^5.10.0",
     "bcryptjs": "^2.4.3",
@@ -23,7 +20,6 @@
     "jsonwebtoken": "^9.0.0",
     "socket.io": "^4.7.0",
     "zod": "^3.22.0"
-    
   },
   "devDependencies": {
     "prisma": "^5.10.0",
