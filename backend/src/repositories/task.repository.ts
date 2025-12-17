@@ -19,7 +19,12 @@ export default class TaskRepository {
     priority?: string;
     sortBy?: "asc" | "desc";
   }) {
-    const { sortBy, ...where } = filters;
+    const { sortBy, status, priority, ...otherFilters } = filters;
+
+    const where: any = { ...otherFilters };
+    if (status) where.status = status as "TODO" | "IN_PROGRESS" | "REVIEW" | "COMPLETED";
+    if (priority) where.priority = priority as "LOW" | "MEDIUM" | "HIGH" | "URGENT";
+
     return prisma.task.findMany({
       where,
       include: {
