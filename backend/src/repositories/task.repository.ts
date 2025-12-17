@@ -1,3 +1,4 @@
+import { Priority } from "@prisma/client";
 import prisma from "../utils/prisma";
 import { CreateTaskInput, UpdateTaskInput } from "../dtos/task.dto";
 
