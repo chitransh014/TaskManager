@@ -19,7 +19,8 @@ export default function Login() {
       navigate("/");
     },
     onError: (error: any) => {
-      show(error.message || "Login failed");
+      const msg = error.response?.data?.message || error.message || "Login failed";
+      show(msg);
     },
   });
 

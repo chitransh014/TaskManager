@@ -17,7 +17,8 @@ export default function Register() {
       navigate("/login");
     },
     onError: (error: any) => {
-      show(error.message || "Registration failed");
+      const msg = error.response?.data?.message || error.message || "Registration failed";
+      show(msg);
     },
   });
 
