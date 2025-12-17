@@ -23,7 +23,7 @@ export default class TaskRepository {
 
     const where: any = { ...otherFilters };
     if (status) where.status = status as "TODO" | "IN_PROGRESS" | "REVIEW" | "COMPLETED";
-    if (priority) where.priority = priority as "LOW" | "MEDIUM" | "HIGH" | "URGENT";
+    if (priority) where.priority = priority as Priority;
 
     return prisma.task.findMany({
       where,
