@@ -1,3 +1,4 @@
+import { ReactNode } from "react";
 import { Route, Routes, Navigate } from "react-router-dom";
 import Login from "../pages/Login";
 import Register from "../pages/Register";
@@ -5,7 +6,7 @@ import Dashboard from "../pages/Dashboard";
 import Profile from "../pages/Profile";
 import { useAuth } from "../hooks/useAuth";
 
-const ProtectedRoute = ({ children }: { children: JSX.Element }) => {
+const ProtectedRoute = ({ children }: { children: ReactNode }) => {
   const { user, loading } = useAuth();
 
   if (loading) return <div className="text-white">Loading...</div>;
