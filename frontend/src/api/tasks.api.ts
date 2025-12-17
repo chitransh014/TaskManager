@@ -20,7 +20,7 @@ export interface UpdateTaskPayload extends Partial<TaskPayload> { }
 // CREATE TASK
 // -----------------------------
 export const createTaskApi = async (data: TaskPayload) => {
-  const res = await api.post("/tasks", data);
+  const res = await api.post("/api/tasks", data);
   return res.data.task;
 };
 
@@ -33,7 +33,7 @@ export const listTasksApi = async (params?: {
   priority?: string;
   sortByDueDate?: "asc" | "desc";
 }) => {
-  const res = await api.get("/tasks", { params });
+  const res = await api.get("/api/tasks", { params });
   return res.data.tasks;
 };
 
@@ -42,7 +42,7 @@ export const listTasksApi = async (params?: {
 // GET TASK BY ID
 // -----------------------------
 export const getTaskApi = async (id: string) => {
-  const res = await api.get(`/tasks/${id}`);
+  const res = await api.get(`/api/tasks/${id}`);
   return res.data.task;
 };
 
@@ -51,7 +51,7 @@ export const getTaskApi = async (id: string) => {
 // UPDATE TASK
 // -----------------------------
 export const updateTaskApi = async (id: string, data: UpdateTaskPayload) => {
-  const res = await api.put(`/tasks/${id}`, data);
+  const res = await api.put(`/api/tasks/${id}`, data);
   return res.data.task;
 };
 
@@ -60,7 +60,7 @@ export const updateTaskApi = async (id: string, data: UpdateTaskPayload) => {
 // DELETE TASK
 // -----------------------------
 export const deleteTaskApi = async (id: string) => {
-  const res = await api.delete(`/tasks/${id}`);
+  const res = await api.delete(`/api/tasks/${id}`);
   return res.data;
 };
 
@@ -69,7 +69,7 @@ export const deleteTaskApi = async (id: string) => {
 // TASKS CREATED BY CURRENT USER
 // -----------------------------
 export const createdByMeApi = async (params?: any) => {
-  const res = await api.get("/tasks/created-by-me", { params });
+  const res = await api.get("/api/tasks/created-by-me", { params });
   return res.data.tasks;
 };
 
@@ -78,7 +78,7 @@ export const createdByMeApi = async (params?: any) => {
 // TASKS ASSIGNED TO ME
 // -----------------------------
 export const assignedToMeApi = async (params?: any) => {
-  const res = await api.get("/tasks/assigned-to-me", { params });
+  const res = await api.get("/api/tasks/assigned-to-me", { params });
   return res.data.tasks;
 };
 
@@ -87,7 +87,7 @@ export const assignedToMeApi = async (params?: any) => {
 // OVERDUE TASKS
 // -----------------------------
 export const overdueTasksApi = async (params?: any) => {
-  const res = await api.get("/tasks/overdue", { params });
+  const res = await api.get("/api/tasks/overdue", { params });
   return res.data.tasks;
 };
 
@@ -96,7 +96,7 @@ export const overdueTasksApi = async (params?: any) => {
 // UPDATE ONLY STATUS
 // -----------------------------
 export const updateStatusApi = async (id: string, status: TaskPayload["status"]) => {
-  const res = await api.put(`/tasks/${id}`, { status });
+  const res = await api.put(`/api/tasks/${id}`, { status });
   return res.data.task;
 };
 
@@ -105,6 +105,6 @@ export const updateStatusApi = async (id: string, status: TaskPayload["status"])
 // UPDATE ASSIGNEE
 // -----------------------------
 export const updateAssigneeApi = async (id: string, assignedToId: string | null) => {
-  const res = await api.put(`/tasks/${id}`, { assignedToId });
+  const res = await api.put(`/api/tasks/${id}`, { assignedToId });
   return res.data.task;
 };
