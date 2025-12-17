@@ -1,0 +1,2 @@
+- [x] Create frontend/src/vite-env.d.ts with /// <reference types="vite/client" />
+- [x] Replace frontend/tsconfig.json with the provided config
