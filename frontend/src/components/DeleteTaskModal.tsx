@@ -15,7 +15,7 @@ export default function DeleteTaskModal({ open, onClose, taskId }: DeleteTaskMod
     mutationFn: () => deleteTaskApi(taskId!),
     onSuccess: () => {
       socket.emit("task:deleted");
-      queryClient.invalidateQueries(["dashboard"]);
+      queryClient.invalidateQueries({ queryKey: ["dashboard"] });
       onClose();
     },
   });
