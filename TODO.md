@@ -1,2 +1,0 @@
-- [x] Add onError handler to Register.tsx mutation to display error messages
-- [ ] Import useNotification in Login.tsx and add onError handler to loginMutation
